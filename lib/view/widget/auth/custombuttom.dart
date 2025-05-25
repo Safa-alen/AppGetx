@@ -9,7 +9,7 @@ class Custombuttom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 10),
       height: 45,
       decoration: BoxDecoration(
           color: Appcolor.Primarycolor,

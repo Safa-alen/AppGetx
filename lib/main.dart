@@ -1,12 +1,8 @@
-import 'package:applicationgetx/core/constant/color.dart';
+import 'package:applicationgetx/binding.dart';
 import 'package:applicationgetx/core/localization/translation.dart';
 import 'package:applicationgetx/core/services/services.dart';
 import 'package:applicationgetx/route.dart';
-import 'package:applicationgetx/view/screen/auth/login.dart';
-import 'package:applicationgetx/view/screen/auth/signup.dart';
-import 'package:applicationgetx/view/screen/language.dart';
-import 'package:applicationgetx/view/screen/onboarding.dart';
-import 'package:applicationgetx/view/widget/language/custombuttomlang.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,20 +25,11 @@ class MyApp extends StatelessWidget {
       translations: Mytranslation(),
       locale: controller.initalLang,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "PlayfairDisplay",
-        textTheme: TextTheme(
-          titleMedium: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Appcolor.black),
-          bodyMedium: TextStyle(
-              height: 2, color: Appcolor.grey, fontWeight: FontWeight.w600),
-          bodyLarge: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 26, color: Appcolor.black),
-          titleSmall: TextStyle(fontSize: 14, color: Appcolor.black),
-        ),
-      ),
-      home: Language(),
-      routes: routes,
+      theme: controller.apptheme,
+      initialBinding: MyBinding(),
+      //home: Language(),
+      //routes: routes,
+      getPages: routes,
     );
   }
 }

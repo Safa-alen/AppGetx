@@ -6,12 +6,20 @@ class customtextfield extends StatelessWidget {
   final String hinttext;
   final IconData iconData;
   final TextEditingController mycontroller;
+  final String? Function(String?)? valid;
+  final bool isNumber;
+  final bool? obscuretext;
+  final void Function()? onTapIcon;
   const customtextfield({
     Key? key,
     required this.labeltext,
     required this.hinttext,
     required this.iconData,
     required this.mycontroller,
+    this.valid,
+    required this.isNumber,
+    this.obscuretext,
+    this.onTapIcon,
   });
 
   @override
@@ -19,6 +27,11 @@ class customtextfield extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 30),
       child: TextFormField(
+        obscureText: obscuretext == null || obscuretext == false ? false : true,
+        keyboardType: isNumber
+            ? TextInputType.numberWithOptions(decimal: true)
+            : TextInputType.text,
+        validator: valid,
         controller: mycontroller,
         decoration: InputDecoration(
             hintText: hinttext,
@@ -35,7 +48,10 @@ class customtextfield extends StatelessWidget {
                     fontSize: 16,
                   ),
             ),
-            suffixIcon: Icon(iconData),
+            suffixIcon: InkWell(
+              child: Icon(iconData),
+              onTap: onTapIcon,
+            ),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(30))),
       ),

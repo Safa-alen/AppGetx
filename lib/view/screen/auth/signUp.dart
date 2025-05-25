@@ -1,10 +1,11 @@
 import 'package:applicationgetx/controller/auth/signup_controller.dart';
 import 'package:applicationgetx/core/constant/color.dart';
+import 'package:applicationgetx/core/function/alertexitapp.dart';
+import 'package:applicationgetx/core/function/validateput.dart';
 import 'package:applicationgetx/view/widget/auth/custombuttom.dart';
 import 'package:applicationgetx/view/widget/auth/customtextbody.dart';
 import 'package:applicationgetx/view/widget/auth/customtexttitle.dart';
 import 'package:applicationgetx/view/widget/auth/customtextformfield.dart';
-
 import 'package:applicationgetx/view/widget/auth/textsignup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,77 +15,104 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SignupcontrollerImp controller = Get.put(SignupcontrollerImp());
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Sign Up",
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(color: Appcolor.grey),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "17".tr,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Appcolor.grey),
+          ),
         ),
-      ),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-        child: ListView(
-          children: [
-            Customtexttitle(
-              title: "Welcome Back",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            CustomtextBody(
-                text:
-                    "Sign Up with Your email and password \n or continue with social media"),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            customtextfield(
-                labeltext: 'Username',
-                hinttext: 'Enter Your username',
-                iconData: Icons.person_2,
-                mycontroller: controller.username),
-            customtextfield(
-              labeltext: 'Email',
-              hinttext: 'Enter Your Email',
-              iconData: Icons.email_outlined,
-              mycontroller: controller.email,
-            ),
-            customtextfield(
-                labeltext: 'Phone',
-                hinttext: 'Enter Your Phone',
-                iconData: Icons.phone_android_sharp,
-                mycontroller: controller.phone),
-            customtextfield(
-                labeltext: "Password",
-                hinttext: "Enter Your Password ",
-                iconData: Icons.lock_outline,
-                mycontroller: controller.password),
-            Text("Forgot Password", textAlign: TextAlign.right),
-            Custombuttom(
-              text: "Sign Up",
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Textsignup(
-              text1: " have any account?  ",
-              text2: "SignIn",
-              onTap: () {
-                controller.goTologin();
-              },
-            )
-          ],
-        ),
-      ),
-    );
+        body: PopScope(
+            canPop: false,
+            onPopInvokedWithResult: (didPop, result) => {AlertExitApp()},
+            child: GetBuilder<SignupcontrollerImp>(
+              builder: (controller) => Container(
+                margin: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                child: Form(
+                  key: controller.formstate,
+                  child: ListView(
+                    children: [
+                      Customtexttitle(
+                        title: "10".tr,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      CustomtextBody(text: "24".tr),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      customtextfield(
+                          isNumber: false,
+                          valid: (Value) {
+                            return ValidatInp(Value!, 5, 100, "usernama");
+                          },
+                          labeltext: '20'.tr,
+                          hinttext: '23'.tr,
+                          iconData: Icons.person_2,
+                          mycontroller: controller.username),
+                      customtextfield(
+                        isNumber: false,
+                        valid: (Value) {
+                          return ValidatInp(Value!, 5, 100, "Email");
+                        },
+                        labeltext: '18'.tr,
+                        hinttext: '12'.tr,
+                        iconData: Icons.email_outlined,
+                        mycontroller: controller.email,
+                      ),
+                      customtextfield(
+                          isNumber: true,
+                          valid: (Value) {
+                            return ValidatInp(Value!, 5, 100, "phone");
+                          },
+                          labeltext: '21'.tr,
+                          hinttext: '22'.tr,
+                          iconData: Icons.phone_android_sharp,
+                          mycontroller: controller.phone),
+                      GetBuilder<SignupcontrollerImp>(
+                        builder: (controller) => customtextfield(
+                            obscuretext: controller.isshowpassword,
+                            onTapIcon: () {
+                              controller.showpassword();
+                            },
+                            isNumber: true,
+                            valid: (Value) {
+                              return ValidatInp(Value!, 5, 30, "password");
+                            },
+                            labeltext: "19".tr,
+                            hinttext: "13".tr,
+                            iconData: Icons.lock_outline,
+                            mycontroller: controller.password),
+                      ),
+                      Custombuttom(
+                        text: "17".tr,
+                        onPressed: () {
+                          controller.Signup();
+                        },
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Textsignup(
+                        text1: "25".tr,
+                        text2: "15".tr,
+                        onTap: () {
+                          controller.goTologin();
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            )));
   }
 }

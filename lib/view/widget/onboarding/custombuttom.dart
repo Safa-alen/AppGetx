@@ -18,7 +18,7 @@ class CustomButtomOnBording extends GetView<OnBordingControllerImp> {
         onPressed: () {
           controller.Naxt();
         },
-        child: Text("Continue"),
+        child: Text("8".tr),
       ),
     );
   }

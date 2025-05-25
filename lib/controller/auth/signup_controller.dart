@@ -1,11 +1,11 @@
 import 'package:applicationgetx/core/constant/route.dart';
-import 'package:applicationgetx/view/screen/auth/signUp.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class SignupController extends GetxController {
   Signup();
-  goTologin();
+  goTologin(); //sigin
 }
 
 class SignupcontrollerImp extends SignupController {
@@ -15,8 +15,22 @@ class SignupcontrollerImp extends SignupController {
 
   late TextEditingController phone;
 
+  bool isshowpassword = true;
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
+
+  showpassword() {
+    isshowpassword = isshowpassword == true ? false : true;
+    update();
+  }
+
   @override
-  Signup() {}
+  Signup() {
+    if (formstate.currentState!.validate()) {
+      Get.offNamed(AppRoute.verfycodesignup);
+    } else {
+      print("Not Valid");
+    }
+  }
 
   @override
   goTologin() {
